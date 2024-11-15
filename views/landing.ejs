@@ -1,0 +1,139 @@
+<!-- Interactive Welcome Section -->
+<section class="welcome-section">
+  <div class="container">
+    <h2 id="greeting"></h2>
+    <p id="motivational-text"></p>
+    <button class="btn btn-welcome" onclick="welcomeAction()">
+      Explore More
+    </button>
+  </div>
+</section>
+
+<!-- About Portal Section -->
+<section class="about-portal">
+  <div class="container">
+    <h3>About Our Portal</h3>
+    <p>
+      Welcome to our job portal, a one-stop solution for job seekers and
+      recruiters alike. Our platform connects talented individuals with top
+      companies in various industries, helping you find the perfect job or
+      recruit the best talent effortlessly. Whether you're looking to advance
+      your career or fill critical roles in your organization, we provide the
+      tools and resources to make your journey a success.
+    </p>
+  </div>
+</section>
+
+<!-- Script to make the greeting dynamic -->
+<script>
+  // Function to get the current time of day and provide a dynamic greeting
+  function updateGreeting() {
+    const now = new Date();
+    const hour = now.getHours();
+    const greetingElement = document.getElementById("greeting");
+    const motivationalTextElement =
+      document.getElementById("motivational-text");
+
+    // Dynamic greeting based on the time of day
+    if (hour < 12) {
+      greetingElement.innerHTML = "Good Morning!";
+      motivationalTextElement.innerHTML =
+        "Start your day with great opportunities and new adventures!";
+    } else if (hour < 18) {
+      greetingElement.innerHTML = "Good Afternoon!";
+      motivationalTextElement.innerHTML =
+        "Keep going! You’re halfway to your goal!";
+    } else {
+      greetingElement.innerHTML = "Good Evening!";
+      motivationalTextElement.innerHTML =
+        "Relax and unwind; tomorrow is a new chance to grow!";
+    }
+  }
+
+  // Placeholder action for the button click
+  function welcomeAction() {
+    alert("Welcome! Explore more features or check your profile.");
+  }
+
+  // Call the function to update greeting when the page loads
+  window.onload = updateGreeting;
+</script>
+
+<style>
+  /* Welcome Section Styles */
+  .welcome-section {
+    background-color: #f8f9fa;
+    padding: 50px 0;
+    text-align: center;
+    border-radius: 8px;
+    /* margin-top: 30px; */
+  }
+
+  .welcome-section h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #007bff;
+  }
+
+  .welcome-section p {
+    font-size: 1.25rem;
+    margin-top: 20px;
+    color: #6c757d;
+  }
+
+  .btn-welcome {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 30px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-welcome:hover {
+    background-color: #0056b3;
+  }
+
+  /* About Portal Section */
+  .about-portal {
+    background-color: #ffffff;
+    padding: 50px 0;
+    /* margin-top: 50px; */
+  }
+
+  .about-portal h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #007bff;
+    text-align: center;
+  }
+
+  .about-portal p {
+    font-size: 1.25rem;
+    text-align: center;
+    color: #6c757d;
+    margin-top: 20px;
+  }
+
+  /* Styling for Responsive Design */
+  @media (max-width: 767px) {
+    .welcome-section h2 {
+      font-size: 1.5rem;
+    }
+
+    .welcome-section p {
+      font-size: 1rem;
+    }
+
+    .about-portal h3 {
+      font-size: 1.75rem;
+    }
+
+    .about-portal p {
+      font-size: 1rem;
+    }
+  }
+</style>

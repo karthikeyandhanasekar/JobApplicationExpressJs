@@ -1,0 +1,143 @@
+<div class="container mt-5">
+  <h2>Applicant Registration</h2>
+
+  <% if (errors && errors.length > 0) { %>
+  <div class="alert alert-danger">
+    <ul>
+      <% errors.forEach(error => { %>
+      <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  </div>
+  <% } %> <% if (success && success.length > 0) { %>
+  <div class="alert alert-success"><%= success %></div>
+  <% } %>
+
+  <form
+    action="/applicants"
+    method="POST"
+    enctype="multipart/form-data"
+    novalidate
+  >
+    <div class="mb-3" style="display: none">
+      <label for="id" class="form-label">ID</label>
+      <input
+        type="text"
+        class="form-control"
+        id="id"
+        style="pointer-events: none"
+        name="id"
+        value="<%= applicant ? applicant.id : '' %>"
+        required
+      />
+      <small id="nameError" class="error-message"></small>
+    </div>
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        value="<%= applicant ? applicant.name : '' %>"
+        required
+      />
+      <small id="nameError" class="error-message"></small>
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        value="<%= applicant ? applicant.email : '' %>"
+        required
+      />
+      <small id="emailError" class="error-message"></small>
+    </div>
+
+    <div class="mb-3">
+      <label for="contact" class="form-label">Contact Number</label>
+      <input
+        type="tel"
+        class="form-control"
+        id="contact"
+        name="contact"
+        value="<%= applicant ? applicant.contact : '' %>"
+        required
+      />
+      <small id="contactError" class="error-message"></small>
+    </div>
+
+    <div class="mb-3">
+      <label for="resume" class="form-label">Resume (PDF)</label>
+      <input
+        type="file"
+        class="form-control"
+        id="resume"
+        name="resume"
+        accept=".pdf"
+        required
+      />
+      <small id="resumeError" class="error-message"></small>
+      <% if (applicant && applicant.resumePath) { %>
+      <p>Current Resume: <a href="<%= applicant.resumePath %>">Download</a></p>
+      <% } %>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+<script>
+  function validateForm() {
+    let valid = true;
+
+    const name = document.getElementById("name");
+    const email = document.getElementById("email");
+    const contact = document.getElementById("contact");
+    const resume = document.getElementById("resume");
+
+    const nameError = document.getElementById("nameError");
+    const emailError = document.getElementById("emailError");
+    const contactError = document.getElementById("contactError");
+    const resumeError = document.getElementById("resumeError");
+
+    nameError.innerText =
+      emailError.innerText =
+      contactError.innerText =
+      resumeError.innerText =
+        "";
+
+    if (name.value.trim() === "") {
+      nameError.innerText = "Name is required";
+      valid = false;
+    }
+
+    const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+    if (!emailPattern.test(email.value)) {
+      emailError.innerText = "Please enter a valid email address";
+      valid = false;
+    }
+
+    if (!/^\d{10}$/.test(contact.value)) {
+      contactError.innerText = "Please enter a valid 10-digit contact number";
+      valid = false;
+    }
+
+    if (!resume.value.toLowerCase().endsWith(".pdf")) {
+      resumeError.innerText = "Resume must be a PDF file";
+      valid = false;
+    }
+
+    return valid;
+  }
+</script>
+<style>
+  .error-message {
+    color: red;
+    font-size: 0.9em;
+  }
+</style>

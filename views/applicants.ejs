@@ -1,0 +1,34 @@
+<% include('layout', { title: 'Applicant List' }) %>
+
+<div class="applicant-list-container">
+  <h1>Applicants for <%= job.position %> at <%= job.companyName %></h1>
+
+  <% if (applicants.length === 0) { %>
+  <p>No applicants for this job yet.</p>
+  <% } else { %>
+  <table class="applicant-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Resume</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% applicants.forEach(applicant => { %>
+      <tr>
+        <td><%= applicant.name %></td>
+        <td><%= applicant.email %></td>
+        <td>
+          <a href="/resumes/<%= applicant.resumeFile %>" target="_blank"
+            >View Resume</a
+          >
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  <% } %>
+</div>
+
+<% include('footer') %>

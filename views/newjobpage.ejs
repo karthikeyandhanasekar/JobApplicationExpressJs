@@ -1,0 +1,30 @@
+<% include('layout', { title: 'Create New Job' }) %>
+
+<div class="new-job-container">
+    <h1>Create a New Job Posting</h1>
+    <form action="/jobs" method="POST">
+        <div class="form-group">
+            <label for="position">Job Title</label>
+            <input type="text" name="position" id="position" required />
+        </div>
+        <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" name="location" id="location" required />
+        </div>
+        <div class="form-group">
+            <label for="salary">Salary (in lpa)</label>
+            <input type="number" name="salary" id="salary" required />
+        </div>
+        <div class="form-group">
+            <label for="description">Job Description</label>
+            <textarea name="description" id="description" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="technologies">Skills Required</label>
+            <input type="text" name="technologies" id="technologies" placeholder="e.g., Node.js, React, MongoDB" required />
+        </div>
+        <button type="submit">Create Job</button>
+    </form>
+</div>
+
+<% include('footer') %>

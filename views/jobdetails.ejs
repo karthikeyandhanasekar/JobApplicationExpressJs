@@ -1,0 +1,116 @@
+<!-- Main Job Details Section -->
+<div class="container my-4">
+  <div class="row">
+    <div class="col-md-6 ">
+      <div class="job-card">
+        <h3><%= job.companyName %></h3>
+        <p><strong>Position:</strong> <%= job.position %></p>
+        <p><strong>Location:</strong> <%= job.location %></p>
+        <p><strong>Salary:</strong> ₹<%= job.salary %> LPA</p>
+        <p><strong>Description:</strong> <%= job.description %></p>
+        <h5>Technologies Required:</h5>
+        <div class="technologies mb-3">
+          <div class="d-flex flex-wrap">
+            <% job.requiredSkills.forEach(tech => { %>
+            <span class="badge bg-secondary me-2 mb-2"><%= tech %></span>
+            <% }) %>
+          </div>
+        </div>
+        <p><strong>Openings:</strong> <%= job.openings %></p>
+        <p>
+          <strong>Application Posted on:</strong> <%= new
+          Date(job.postedDate).toLocaleDateString() %>
+        </p>
+        <p>
+          <strong>Application Deadline:</strong> <%= new
+          Date(job.applicationDeadline).toLocaleDateString() %>
+        </p>
+        <a href="/apply/<%= job.id %>" class="btn btn-primary">Apply Now</a>
+      </div>
+    </div>
+ <% if (isAuth) {%>
+  <div class="col-md-6 job-card " >
+    <h2 class="mb-4">Applicants %></h2>
+
+    <% if (job.applicants.length > 0) { %>
+      <% job.applicants.forEach(applicant => { %>
+        <div class="applicant-card row align-items-center">
+          <div class="col-md-12">
+            <h5 class="mb-1"><%= applicant.name %></h5>
+            <p class="mb-1"><strong>Email:</strong> <%= applicant.email %></p>
+          </div>
+          <div class="col-md-4 text-md-end">
+            <a
+              href="/resumes/<%= applicant.resume %>"
+              class="btn btn-download"
+              download
+              >Download Resume</a
+            >
+          </div>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p class="no-applicants">No applications have been submitted for this job yet.</p>
+    <% } %>
+  </div>
+ <% } %>
+    
+    </div>
+  </div>
+</div>
+
+<style>
+  .job-card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .job-card h3 {
+    color: #007bff;
+  }
+  .job-card .btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+  .job-card .btn:hover {
+    background-color: #0056b3;
+  }
+  .job-technologies {
+    list-style-type: none;
+    padding: 0;
+  }
+  .job-technologies li {
+    display: inline-block;
+    background-color: #e9ecef;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+  }
+  .applicant-card {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+  }
+  .applicant-card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  .btn-download {
+    background-color: #28a745;
+    color: #fff;
+  }
+  .btn-download:hover {
+    background-color: #218838;
+  }
+  .no-applicants {
+    text-align: center;
+    font-size: 1.2em;
+    color: #6c757d;
+  }
+</style>
